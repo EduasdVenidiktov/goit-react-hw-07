@@ -6,8 +6,8 @@ export default function SearchBox() {
   const dispatch = useDispatch();
 
   const searchContact = useSelector((state) => state.filters.statusFilter);
-  const handleInputChange = (event) => {
-    const value = event.target.value;
+  const handleInputChange = (ev) => {
+    const value = ev.target.value;
     dispatch(setStatusFilter(value));
   };
 

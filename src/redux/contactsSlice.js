@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { selectContacts } from "./selectors";
 
-import { fetchContacts } from "./contactsOps";
+import { fetchContacts, deleteContacts, addContacts } from "./contactsOps";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -19,9 +19,34 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.items = action.payload; // те що прийшло з бекенду state.items.push(...action.payload)
       })
       .addCase(fetchContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteContacts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const deleteContactId = action.payload.id; //отримати id видаленого контакту
+        //state.items-повертає об'єкт, а якщо замість поставити return, то повертає масив items[] і буде помилка
+        state.items = state.items.filter((item) => item.id !== deleteContactId); // Оновk.'vj стан, видаливши контакт з id deletedContactId
+      })
+      .addCase(deleteContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addContacts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = [...state.items, action.payload];
+      })
+      .addCase(addContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
@@ -36,7 +61,9 @@ const contactsSlice = createSlice({
 // console.log(selectContacts);
 // export default contactsSlice.reducer;
 export const contactsReducer = contactsSlice.reducer;
+export default contactsSlice;
 
+//============================================================================================
 // reducers: {
 //   fetchingInProgress(state) {
 //     state.loading = true;

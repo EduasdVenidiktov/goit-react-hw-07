@@ -1,8 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 // import Contact from "./components/Contact/Contact";
-import { fetchContacts } from "./redux/contactsOps";
+import {
+  addContacts,
+  deleteContacts,
+  fetchContacts,
+} from "./redux/contactsOps";
 import { selectContacts } from "./redux/selectors";
+import ContactForm from "./components/ContactForm/ContactForm";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -11,13 +16,38 @@ export default function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  //додавання контакту на бекенд
+
+  // Визначаємо змінну newItem з пустим об'єктом або з об'єктом, який містить дані форми
+  const newItem = {
+    name: "Нове Ім'я",
+    number: "1234567890",
+  };
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    dispatch(addContacts({ newItem })); //об'єкт контакту з форми
+  };
+  console.log(handleSubmit);
+
   const { isLoading, error, items } = contactsState; // деструктуруємо потрібні дані зі стану
 
   return (
     <div>
+      <ContactForm />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {items.length > 0 && JSON.stringify(items, null, 2)}
+      {items.length > 0 && (
+        <ul>
+          {items.map((item) => (
+            <li key={item.id}>
+              {item.id}. {item.name} {item.number}
+              <button onClick={() => dispatch(deleteContacts(item.id))}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
