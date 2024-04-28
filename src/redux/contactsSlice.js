@@ -33,7 +33,7 @@ const contactsSlice = createSlice({
         state.error = null;
         const deleteContactId = action.payload.id; //отримати id видаленого контакту
         //state.items-повертає об'єкт, а якщо замість поставити return, то повертає масив items[] і буде помилка
-        state.items = state.items.filter((item) => item.id !== deleteContactId); // Оновk.'vj стан, видаливши контакт з id deletedContactId
+        state.items = state.items.filter((item) => item.id !== deleteContactId); // Оновлюю стан, видаливши контакт з id deletedContactId
       })
       .addCase(deleteContacts.rejected, (state, action) => {
         state.isLoading = false;

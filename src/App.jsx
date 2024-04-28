@@ -3,11 +3,12 @@ import { useEffect } from "react";
 // import Contact from "./components/Contact/Contact";
 import {
   addContacts,
-  deleteContacts,
+  // deleteContacts,
   fetchContacts,
 } from "./redux/contactsOps";
 import { selectContacts } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
+import Contact from "./components/Contact/Contact";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,10 +41,7 @@ export default function App() {
         <ul>
           {items.map((item) => (
             <li key={item.id}>
-              {item.id}. {item.name} {item.number}
-              <button onClick={() => dispatch(deleteContacts(item.id))}>
-                Delete
-              </button>
+              <Contact id={item.id} name={item.name} number={item.number} />
             </li>
           ))}
         </ul>
@@ -53,10 +51,9 @@ export default function App() {
 }
 
 // JSON.stringify(items, null, 2)
-{
-  /* <ul>
+
+/* <ul>
           {items.map((contact) => (
             <Contact key={contact.id} contact={contact} />
           ))}
         </ul> */
-}
