@@ -4,3 +4,7 @@
   flex-wrap: wrap;
   margin-top: 20px;
 }
+
+.contactList li {
+  flex: 1; /* Распределение пространства для элементов списка */
+}

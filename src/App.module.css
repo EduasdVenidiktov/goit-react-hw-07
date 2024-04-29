@@ -1,7 +1,10 @@
 .container {
-  margin: 40px;
   max-width: 1440px;
+  padding: 0, 20px, 40px;
+  margin: 20px auto 0;
+  background-color: rgb(252, 252, 247);
 }
+
 .title {
   margin-bottom: 20px;
 }

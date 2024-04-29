@@ -29,9 +29,9 @@
 .buttonDelete {
   border-radius: 8px;
   border: 3px solid black;
-  padding: 7px;
+  padding: 7px 12px;
   cursor: pointer;
-  background-color: rgb(27, 188, 188);
+  background-color: aqua;
 }
 .buttonDelete:hover {
   color: white;

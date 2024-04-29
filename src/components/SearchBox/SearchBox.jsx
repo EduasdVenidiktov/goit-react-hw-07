@@ -1,28 +1,43 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { filterContacts } from "../../redux/contactsOps";
-
+import { useSelector } from "react-redux";
 import css from "./SearchBox.module.css";
+import Contact from "../Contact/Contact";
 
 const SearchBox = () => {
-  const dispatch = useDispatch();
   const [searchContact, setSearchContact] = useState("");
+  const contacts = useSelector((state) => state.contacts.items); // отримуємо всі контакти зі стану Redux
 
   const handleInputChange = (ev) => {
     const { value } = ev.target;
     setSearchContact(value);
-    dispatch(filterContacts(value)); //Запускаємо процесс пошука при кожній зміні значення
   };
+
+  // Фільтруємо контакти за іменем та номером телефону
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchContact.toLowerCase()) ||
+      contact.number.includes(searchContact)
+  );
+
   return (
     <div>
       <p className={css.label}>Find contacts by name</p>
       <input
-        className={css.inputFilterContact}
+        className={css.inputArea}
         type="text"
         value={searchContact}
         onChange={handleInputChange}
-        placeholder="Search contact..."
+        placeholder="Input name or phon number"
       />
+
+      {/* Відобрадаємо відфільтровані контакти */}
+      <ul>
+        {filteredContacts.map((item) => (
+          <li key={item.id}>
+            <Contact id={item.id} name={item.name} number={item.number} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

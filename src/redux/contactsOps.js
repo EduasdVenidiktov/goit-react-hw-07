@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { fetchingError, fetchingInProgress, fetchingOk } from "./contactsSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://662aacb4d3f63c12f45861e5.mockapi.io";
@@ -23,7 +22,6 @@ const fetchContacts = createAsyncThunk(
 const addContacts = createAsyncThunk(
   "contacts/add",
 
-  //перевірити замість contact иає бути об'єкт нового контакту
   async (newItem, thunkAPI) => {
     try {
       const response = await axios.post("/contacts", newItem);
@@ -46,31 +44,4 @@ const deleteContacts = createAsyncThunk(
   }
 );
 
-const filterContacts = createAsyncThunk(
-  "contacts/filter",
-
-  //перевірити замість contact иає бути об'єкт нового контакту
-  async (searchContact, thunkAPI) => {
-    try {
-      // Створюємо URL х параметром пошука
-      const url = `/contact?search=${searchContact}`;
-      const response = await axios.get(url);
-      return response.data;
-    } catch (ev) {
-      return thunkAPI.rejectWithValue(ev.message);
-    }
-  }
-);
-
-export { fetchContacts, addContacts, deleteContacts, filterContacts };
-
-// export const fetchContacts = () => async (dispatch) => {
-//   dispatch(fetchingInProgress());
-//   try {
-//     const response = await axios.get("/contacts");
-//     dispatch(fetchingOk(response.data));
-//     console.dir(fetchContacts);
-//   } catch (error) {
-//     dispatch(fetchingError(error.message));
-//   }
-// };
+export { fetchContacts, addContacts, deleteContacts };

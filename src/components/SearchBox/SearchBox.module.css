@@ -1,19 +1,17 @@
 .feedbackText {
-  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 8px;
 }
 .label {
   font-weight: bold;
 }
 .inputArea {
-  /* margin: 20px; */
+  width: 310px;
+  height: 30px;
+  margin-bottom: 20px;
+  padding-left: 10px;
 }
 .inputArea:hover {
   border-color: blue;
   background-color: rgb(214, 213, 213);
-}
-
-.inputFilterContact {
-  width: 315px;
-  margin-bottom: 20px;
 }

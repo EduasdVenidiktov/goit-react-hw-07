@@ -8,8 +8,10 @@ import {
 } from "./redux/contactsOps";
 import { selectContacts } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
-import Contact from "./components/Contact/Contact";
+// import Contact from "./components/Contact/Contact";
 import SearchBox from "./components/SearchBox/SearchBox";
+
+import css from "./App.module.css";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -18,23 +20,19 @@ export default function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const { isLoading, error, items } = contactsState; // деструктуруємо потрібні дані зі стану
+  const { isLoading, error } = contactsState; // деструктуруємо потрібні дані зі стану
+  const contacts = useSelector((state) => state.contacts.contacts);
 
   return (
-    <div>
-      <ContactForm />
+    <div className={css.container}>
+      <header>
+        <h1 className={css.title}>Phonebook</h1>
+      </header>
+
+      <ContactForm contacts={contacts} />
       <SearchBox />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {items.length > 0 && (
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>
-              <Contact id={item.id} name={item.name} number={item.number} />
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
