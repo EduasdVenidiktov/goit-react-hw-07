@@ -20,23 +20,6 @@ const fetchContacts = createAsyncThunk(
   }
 );
 
-console.dir(fetchContacts);
-console.log(fetchContacts.fulfilled.type);
-
-const deleteContacts = createAsyncThunk(
-  "contacts/delete",
-  async (itemId, thunkAPI) => {
-    console.log(itemId);
-
-    try {
-      const response = await axios.delete(`/contacts/${itemId}`);
-      return response.data;
-    } catch (ev) {
-      return thunkAPI.rejectWithValue(ev.message);
-    }
-  }
-);
-
 const addContacts = createAsyncThunk(
   "contacts/add",
 
@@ -51,7 +34,35 @@ const addContacts = createAsyncThunk(
   }
 );
 
-export { fetchContacts, addContacts, deleteContacts };
+const deleteContacts = createAsyncThunk(
+  "contacts/delete",
+  async (itemId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/contacts/${itemId}`);
+      return response.data;
+    } catch (ev) {
+      return thunkAPI.rejectWithValue(ev.message);
+    }
+  }
+);
+
+const filterContacts = createAsyncThunk(
+  "contacts/filter",
+
+  //перевірити замість contact иає бути об'єкт нового контакту
+  async (searchContact, thunkAPI) => {
+    try {
+      // Створюємо URL х параметром пошука
+      const url = `/contact?search=${searchContact}`;
+      const response = await axios.get(url);
+      return response.data;
+    } catch (ev) {
+      return thunkAPI.rejectWithValue(ev.message);
+    }
+  }
+);
+
+export { fetchContacts, addContacts, deleteContacts, filterContacts };
 
 // export const fetchContacts = () => async (dispatch) => {
 //   dispatch(fetchingInProgress());

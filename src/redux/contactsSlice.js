@@ -53,13 +53,6 @@ const contactsSlice = createSlice({
   },
 });
 
-// export const { fetchingInProgress, fetchingOk, fetchingError } =
-//   contactsSlice.actions;
-
-// export const selectContacts = (state) => state.contacts; //отримуємо списко контактів з Redux
-
-// console.log(selectContacts);
-// export default contactsSlice.reducer;
 export const contactsReducer = contactsSlice.reducer;
 export default contactsSlice;
 
@@ -78,3 +71,11 @@ export default contactsSlice;
 //     state.error = action.payload;
 //   },
 // },
+
+// export const { fetchingInProgress, fetchingOk, fetchingError } =
+//   contactsSlice.actions;
+
+// export const selectContacts = (state) => state.contacts; //отримуємо списко контактів з Redux
+
+// console.log(selectContacts);
+// export default contactsSlice.reducer;

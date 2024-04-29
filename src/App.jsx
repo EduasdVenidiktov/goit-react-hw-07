@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 // import Contact from "./components/Contact/Contact";
 import {
-  addContacts,
+  // addContacts,
   // deleteContacts,
   fetchContacts,
 } from "./redux/contactsOps";
 import { selectContacts } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Contact from "./components/Contact/Contact";
+import SearchBox from "./components/SearchBox/SearchBox";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -17,24 +18,12 @@ export default function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  //додавання контакту на бекенд
-
-  // Визначаємо змінну newItem з пустим об'єктом або з об'єктом, який містить дані форми
-  const newItem = {
-    name: "Нове Ім'я",
-    number: "1234567890",
-  };
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    dispatch(addContacts({ newItem })); //об'єкт контакту з форми
-  };
-  console.log(handleSubmit);
-
   const { isLoading, error, items } = contactsState; // деструктуруємо потрібні дані зі стану
 
   return (
     <div>
       <ContactForm />
+      <SearchBox />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {items.length > 0 && (

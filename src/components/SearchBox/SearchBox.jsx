@@ -1,28 +1,60 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setStatusFilter } from "../../redux/filtersSlice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { filterContacts } from "../../redux/contactsOps";
+
 import css from "./SearchBox.module.css";
 
-export default function SearchBox() {
+const SearchBox = () => {
   const dispatch = useDispatch();
+  const [searchContact, setSearchContact] = useState("");
 
-  const searchContact = useSelector((state) => state.filters.statusFilter);
   const handleInputChange = (ev) => {
-    const value = ev.target.value;
-    dispatch(setStatusFilter(value));
+    const { value } = ev.target;
+    setSearchContact(value);
+    dispatch(filterContacts(value)); //Запускаємо процесс пошука при кожній зміні значення
   };
-
   return (
     <div>
       <p className={css.label}>Find contacts by name</p>
       <input
+        className={css.inputFilterContact}
         type="text"
-        placeholder="Search contacts"
         value={searchContact}
         onChange={handleInputChange}
+        placeholder="Search contact..."
       />
     </div>
   );
-}
+};
+
+export default SearchBox;
+//=========================================================
+// працювало без помилок, але ж не корректно
+// import { useDispatch, useSelector } from "react-redux";
+// import { setStatusFilter } from "../../redux/filtersSlice";
+// import css from "./SearchBox.module.css";
+
+// export default function SearchBox() {
+//   const dispatch = useDispatch();
+
+//   const searchContact = useSelector((state) => state.filters.statusFilter);
+//   const handleInputChange = (ev) => {
+//     const value = ev.target.value;
+//     dispatch(setStatusFilter(value));
+//   };
+
+//   return (
+//     <div>
+//       <p className={css.label}>Find contacts by name</p>
+//       <input
+//         type="text"
+//         placeholder="Search contacts"
+//         value={searchContact}
+//         onChange={handleInputChange}
+//       />
+//     </div>
+//   );
+// }
 
 //===============================================================================================
 // import { useState } from "react";
