@@ -10,6 +10,11 @@
   align-items: center; /* Вирівнювання елементів по вертикалі */
 }
 
+.contactContainer:hover {
+  border: 3px solid brown;
+  scale: 1.02;
+}
+
 .icon {
   width: 20px;
 }
@@ -24,6 +29,7 @@
 }
 .phoneNumber:hover {
   color: blue;
+  scale: 1.04;
 }
 
 .buttonDelete {

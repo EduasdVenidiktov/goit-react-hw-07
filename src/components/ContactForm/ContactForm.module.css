@@ -26,6 +26,11 @@
   cursor: text;
   width: 95%;
 }
+.field:hover {
+  border: 2px solid grey;
+  background-color: rgb(214, 213, 213);
+}
+
 .btnAdd {
   margin-top: 20px;
   width: 100%;

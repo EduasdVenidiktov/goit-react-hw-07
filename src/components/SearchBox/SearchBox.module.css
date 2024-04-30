@@ -10,8 +10,10 @@ h2 {
   height: 30px;
   margin-bottom: 20px;
   padding-left: 10px;
+  border-radius: 3px;
 }
 .inputArea:hover {
   border-color: blue;
   background-color: rgb(214, 213, 213);
+  border-radius: 5px;
 }
