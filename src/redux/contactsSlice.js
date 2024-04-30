@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { selectContacts } from "./selectors";
-
 import { fetchContacts, deleteContacts, addContacts } from "./contactsOps";
 
 const contactsSlice = createSlice({
@@ -19,7 +17,7 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload; // те що прийшло з бекенду state.items.push(...action.payload)
+        state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -31,9 +29,8 @@ const contactsSlice = createSlice({
       .addCase(deleteContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const deleteContactId = action.payload.id; //отримати id видаленого контакту
-        //state.items-повертає об'єкт, а якщо замість поставити return, то повертає масив items[] і буде помилка
-        state.items = state.items.filter((item) => item.id !== deleteContactId); // Оновлюю стан, видаливши контакт з id deletedContactId
+        const deleteContactId = action.payload.id;
+        state.items = state.items.filter((item) => item.id !== deleteContactId);
       })
       .addCase(deleteContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -53,29 +50,7 @@ const contactsSlice = createSlice({
   },
 });
 
+// Експорт редюсера
 export const contactsReducer = contactsSlice.reducer;
+
 export default contactsSlice;
-
-//============================================================================================
-// reducers: {
-//   fetchingInProgress(state) {
-//     state.loading = true;
-//   },
-//   fetchingOk(state, action) {
-//     state.loading = false;
-//     state.error = null;
-//     state.items = action.payload;
-//   },
-//   fetchingError(state, action) {
-//     state.loading = false;
-//     state.error = action.payload;
-//   },
-// },
-
-// export const { fetchingInProgress, fetchingOk, fetchingError } =
-//   contactsSlice.actions;
-
-// export const selectContacts = (state) => state.contacts; //отримуємо списко контактів з Redux
-
-// console.log(selectContacts);
-// export default contactsSlice.reducer;

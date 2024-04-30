@@ -6,16 +6,17 @@ import {
   // deleteContacts,
   fetchContacts,
 } from "./redux/contactsOps";
-import { selectContacts } from "./redux/selectors";
+import { selectContactsState } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
 // import Contact from "./components/Contact/Contact";
-import SearchBox from "./components/SearchBox/SearchBox";
 
 import css from "./App.module.css";
+import ContactsList from "./components/ContactList/ContactList";
+// import ContactsList from "./components/ContactList/ContactList";
 
 export default function App() {
   const dispatch = useDispatch();
-  const contactsState = useSelector(selectContacts); // зберігаємо весь стан контактів
+  const contactsState = useSelector(selectContactsState); // зберігаємо весь стан контактів
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -28,11 +29,10 @@ export default function App() {
       <header>
         <h1 className={css.title}>Phonebook</h1>
       </header>
-
       <ContactForm contacts={contacts} />
-      <SearchBox />
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
+      <ContactsList />
     </div>
   );
 }

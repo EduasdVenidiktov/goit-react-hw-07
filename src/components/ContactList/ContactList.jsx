@@ -1,31 +1,33 @@
+// // =========== з пропсами ========================
 import { useState } from "react";
-import Contact from "./Contact"; // предполагается, что у вас есть компонент Contact
+import { useSelector } from "react-redux";
+import Contact from "../Contact/Contact";
+import SearchBox from "../SearchBox/SearchBox";
 import css from "./ContactList.module.css";
+import { selectFilteredContacts } from "../../redux/selectors";
 
-const ContactsList = ({ contacts }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const ContactsList = () => {
+  const contacts = useSelector(selectFilteredContacts);
 
-  // Фильтрация контактов по имени
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [searchContact, setSearchContact] = useState("");
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearchChange = (value) => {
+    setSearchContact(value);
   };
+
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchContact.toLowerCase()) ||
+      contact.number.includes(searchContact)
+  );
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search contact..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
+      <SearchBox value={searchContact} onChange={handleSearchChange} />
       <ul className={css.contactList}>
-        {filteredContacts.map((contact) => (
-          <li key={contact.id}>
-            <Contact contact={contact} />
+        {filteredContacts.map((item) => (
+          <li key={item.id}>
+            <Contact id={item.id} name={item.name} number={item.number} />
           </li>
         ))}
       </ul>
@@ -34,27 +36,3 @@ const ContactsList = ({ contacts }) => {
 };
 
 export default ContactsList;
-
-//====================================================
-
-// import { useSelector } from "react-redux";
-// import css from "./ContactList.module.css";
-// import Contact from "../Contact/Contact";
-// // import { selectContacts } from "../../redux/contactsSlice";
-// import { selectVisibleContacts } from "../../redux/selectors";
-
-// export default function ContactList() {
-//   const filteredContacts = useSelector(selectVisibleContacts); //отримав список контактів з contactsSlice(з Redux)
-
-//   return (
-//     <div>
-//       <ul className={css.contactList}>
-//         {filteredContacts.map((contact) => (
-//           <li key={contact.id}>
-//             <Contact data={contact} />
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
