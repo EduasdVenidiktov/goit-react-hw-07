@@ -1,4 +1,3 @@
-// ================ з пропсами =====================
 import css from "./SearchBox.module.css";
 
 const SearchBox = ({ value, onChange }) => {

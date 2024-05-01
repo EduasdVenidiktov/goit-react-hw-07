@@ -1,4 +1,4 @@
-// // =========== з пропсами ========================
+// =========== з пропсами ========================
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";

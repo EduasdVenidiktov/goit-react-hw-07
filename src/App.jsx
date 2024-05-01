@@ -1,18 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-// import Contact from "./components/Contact/Contact";
-import {
-  // addContacts,
-  // deleteContacts,
-  fetchContacts,
-} from "./redux/contactsOps";
+import { fetchContacts } from "./redux/contactsOps";
 import { selectContactsState } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
-// import Contact from "./components/Contact/Contact";
 
 import css from "./App.module.css";
 import ContactsList from "./components/ContactList/ContactList";
-// import ContactsList from "./components/ContactList/ContactList";
+import Loader from "./components/Loader/Loader";
+import { ShowErrorMessage } from "./components/Error/Error";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -22,7 +17,7 @@ export default function App() {
   }, [dispatch]);
 
   const { isLoading, error } = contactsState; // деструктуруємо потрібні дані зі стану
-  const contacts = useSelector((state) => state.contacts.contacts);
+  const contacts = useSelector(selectContactsState);
 
   return (
     <div className={css.container}>
@@ -30,17 +25,9 @@ export default function App() {
         <h1 className={css.title}>Phonebook</h1>
       </header>
       <ContactForm contacts={contacts} />
-      {isLoading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <ShowErrorMessage />}
+      {isLoading ? <Loader /> : null}
       <ContactsList />
     </div>
   );
 }
-
-// JSON.stringify(items, null, 2)
-
-/* <ul>
-          {items.map((contact) => (
-            <Contact key={contact.id} contact={contact} />
-          ))}
-        </ul> */

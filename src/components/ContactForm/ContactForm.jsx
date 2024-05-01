@@ -2,9 +2,6 @@ import css from "./ContactForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik"; // Для того щоб відобразити користувачу помилки валідації, використовується компонент ErrorMessage.
 import { useId } from "react";
 import * as Yup from "yup"; //імпорт бібліотеки валідації в компонент форми.
-// import { v4 as uuidv4 } from "uuid";
-import { nanoid } from "nanoid";
-// import addContact from "../../redux/contactsSlice.js";
 import { useDispatch } from "react-redux";
 import CounterContacts from "../Counter/Counter.jsx";
 import { addContacts } from "../../redux/contactsOps.js";
@@ -17,7 +14,7 @@ const initialValues = {
 export default function ContactForm() {
   const dispatch = useDispatch();
   const nameFieldId = useId(); //хук useId для створення унікальних ідентифікаторів полів.
-  const numberFieldId = nanoid();
+  const numberFieldId = useId();
   const FeedbackSchema = Yup.object().shape({
     Name: Yup.string()
       .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
@@ -31,7 +28,6 @@ export default function ContactForm() {
   // При відправці форми викликається колбек-функція
   const handleSubmit = (values, actions) => {
     const newContact = {
-      id: nanoid(),
       name: values.Name,
       number: values.Number,
     };
