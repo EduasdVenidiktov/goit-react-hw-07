@@ -7,27 +7,31 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import css from "./App.module.css";
 import ContactsList from "./components/ContactList/ContactList";
 import Loader from "./components/Loader/Loader";
-import { ShowErrorMessage } from "./components/Error/Error";
+import { Toaster } from "react-hot-toast"; // Импортируем Toaster
 
 export default function App() {
   const dispatch = useDispatch();
-  const contactsState = useSelector(selectContactsState); // зберігаємо весь стан контактів
+  const contactsState = useSelector(selectContactsState);
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts()).catch((error) => {
+      console.error("Error loading contacts:", error);
+      // Отобразить сообщение об ошибке для пользователя с помощью Toaster
+      toast.error("Failed to load contacts. Please try again later.");
+    });
   }, [dispatch]);
 
-  const { isLoading, error } = contactsState; // деструктуруємо потрібні дані зі стану
-  const contacts = useSelector(selectContactsState);
+  const { isLoading } = contactsState;
 
   return (
     <div className={css.container}>
       <header>
         <h1 className={css.title}>Phonebook</h1>
       </header>
-      <ContactForm contacts={contacts} />
-      {error && <ShowErrorMessage />}
+      <ContactForm contacts={contactsState} />
       {isLoading ? <Loader /> : null}
       <ContactsList />
+      <Toaster position="top-center" />{" "}
+      {/* Убедитесь, что Toaster находится в корневом узле вашего приложения */}
     </div>
   );
 }

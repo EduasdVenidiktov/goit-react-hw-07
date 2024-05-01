@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://662aacb4d3f63c12f45861e5.mockapi.io";
 
@@ -12,9 +13,12 @@ const fetchContacts = createAsyncThunk(
       const response = await axios.get("/contacts");
       // При успішному запиті повертаємо проміс із даними
       return response.data;
-    } catch (ev) {
+    } catch (error) {
       // При помилці запиту повертаємо проміс, який буде відхилений з текстом помилки
-      return thunkAPI.rejectWithValue(ev.message);
+      // Выводим сообщение об ошибке с помощью toast
+      toast.error("Failed to load contacts. Please try again later.");
+      // Возвращаем ошибку
+      throw error;
     }
   }
 );
