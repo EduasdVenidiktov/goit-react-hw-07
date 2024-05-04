@@ -1,6 +1,6 @@
 .title,
 .text {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .inputArea:hover {
@@ -12,7 +12,7 @@
   padding: 20px;
   border-radius: 4px;
   background-color: rgb(81, 101, 215);
-  width: 280px;
+  width: 360px;
   border: 3px solid black;
   color: white;
   /* display: flex; */

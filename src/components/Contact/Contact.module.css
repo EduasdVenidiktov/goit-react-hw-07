@@ -2,7 +2,7 @@
   padding: 10px;
   border-radius: 4px;
   border: 2px solid gray;
-  width: 300px;
+  width: 380px;
   margin-bottom: 20px;
   display: flex;
   background-color: aqua;
@@ -16,9 +16,9 @@
 }
 
 .icon {
-  width: 20px;
+  width: 16px;
+  margin-right: 10px;
 }
-
 .infoBlock {
   display: flex;
   gap: 10px;
@@ -32,6 +32,9 @@
   scale: 1.04;
 }
 
+.buttonBox {
+  margin-right: 20px;
+}
 .buttonDelete {
   border-radius: 8px;
   border: 1px solid rgb(61, 60, 60);

@@ -5,7 +5,7 @@ import { setStatusFilter } from "../../redux/filtersSlice";
 const SearchBox = ({ value, onChange }) => {
   const dispatch = useDispatch();
   const handleInputChange = (ev) => {
-    const newValue = ev.target.value;
+    const newValue = ev.target.value.trim();
 
     onChange(newValue); // Вызываем функцию onChange для обновления значения в родительском компоненте
     dispatch(setStatusFilter(newValue));

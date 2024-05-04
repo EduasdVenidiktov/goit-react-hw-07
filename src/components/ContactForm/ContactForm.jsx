@@ -8,13 +8,17 @@ import { addContacts } from "../../redux/contactsOps.js";
 
 const initialValues = {
   Name: "",
+  Country: "",
   Number: "",
+  Mail: "",
 };
 
 export default function ContactForm() {
   const dispatch = useDispatch();
   const nameFieldId = useId(); //хук useId для створення унікальних ідентифікаторів полів.
+  const countryFieldId = useId();
   const numberFieldId = useId();
+  const mailFieldId = useId();
   const FeedbackSchema = Yup.object().shape({
     Name: Yup.string()
       .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
@@ -22,14 +26,28 @@ export default function ContactForm() {
       .max(50, "Too Long!")
       // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
       .required("Required"),
+    Country: Yup.string()
+      .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
+      .required("Required"),
     Number: Yup.string("Must be a valid number!").required("Required"),
+    Mail: Yup.string()
+      .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
+      .required("Required"),
   });
 
   // При відправці форми викликається колбек-функція
   const handleSubmit = (values, actions) => {
     const newContact = {
       name: values.Name,
+      country: values.Country,
       number: values.Number,
+      mail: values.Mail,
     };
     dispatch(addContacts(newContact)); // Додаємо новий контакт до списку або передаємо його до батьківського компонента
 
@@ -54,6 +72,20 @@ export default function ContactForm() {
           <ErrorMessage name="Name" component="p" className={css.errorMess} />
         </div>
         <div>
+          <label htmlFor={countryFieldId}>Country</label>
+          <Field
+            className={css.field}
+            type="text"
+            name="Country"
+            id={countryFieldId}
+          />
+          <ErrorMessage
+            name="Country"
+            component="p"
+            className={css.errorMess}
+          />
+        </div>
+        <div>
           <label htmlFor={numberFieldId}>Number</label>
           <Field
             className={css.field}
@@ -63,6 +95,17 @@ export default function ContactForm() {
           />
           <ErrorMessage name="Number" component="p" className={css.errorMess} />
         </div>
+        <div>
+          <label htmlFor={mailFieldId}>e-mail</label>
+          <Field
+            className={css.field}
+            type="text"
+            name="Mail"
+            id={mailFieldId}
+          />
+          <ErrorMessage name="Mail" component="p" className={css.errorMess} />
+        </div>
+
         <CounterContacts />
         <button className={css.btnAdd} type="submit">
           Add contact

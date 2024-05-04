@@ -1,11 +1,13 @@
 import css from "./Contact.module.css";
 import personIcon from "../../assets/person.svg";
 import phoneIcon from "../../assets/phone.svg";
+import countryIcon from "../../assets/country.svg";
+import mailIcon from "../../assets/mail.svg";
 
 import { useDispatch } from "react-redux";
 import { deleteContacts } from "../../redux/contactsOps";
 
-export default function Contact({ id, name, number }) {
+export default function Contact({ id, name, number, mail, country }) {
   const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContacts(id));
   return (
@@ -16,15 +18,27 @@ export default function Contact({ id, name, number }) {
           <h3>{name}</h3>
         </div>
         <div className={css.infoBlock}>
+          <img className={css.icon} src={countryIcon} alt="Icon country" />
+          <p>{country}</p>
+        </div>
+        <div className={css.infoBlock}>
           <img className={css.icon} src={phoneIcon} alt="Icon phone" />
           <a className={css.phoneNumber} href={`tel:${number}`}>
             {number}
           </a>
         </div>
+        <div className={css.infoBlock}>
+          <img className={css.icon} src={mailIcon} alt="Icon phone" />
+          <a className={css.phoneNumber} href={`tel:${mail}`}>
+            {mail}
+          </a>
+        </div>
       </div>
-      <button className={css.buttonDelete} onClick={handleDelete}>
-        Delete
-      </button>
+      <div className={css.buttonBox}>
+        <button className={css.buttonDelete} onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
