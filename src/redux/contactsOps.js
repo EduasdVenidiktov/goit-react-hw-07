@@ -13,12 +13,9 @@ const fetchContacts = createAsyncThunk(
       const response = await axios.get("/contacts");
       // При успішному запиті повертаємо проміс із даними
       return response.data;
-    } catch (error) {
-      // При помилці запиту повертаємо проміс, який буде відхилений з текстом помилки
-      // Выводим сообщение об ошибке с помощью toast
+    } catch (ev) {
       toast.error("Failed to load contacts. Please try again later.");
-      // Возвращаем ошибку
-      throw error;
+      return thunkAPI.rejectWithValue(ev.message);
     }
   }
 );
