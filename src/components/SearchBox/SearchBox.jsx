@@ -7,7 +7,7 @@ const SearchBox = ({ value, onChange }) => {
   const handleInputChange = (ev) => {
     const newValue = ev.target.value.trim();
 
-    onChange(newValue); // Вызываем функцию onChange для обновления значения в родительском компоненте
+    onChange(newValue); // Викликаємо функцію onChange для оновлення значення в батьківському компоненті
     dispatch(setStatusFilter(newValue));
   };
 
