@@ -12,7 +12,7 @@
   padding: 20px;
   border-radius: 4px;
   background-color: rgb(81, 101, 215);
-  width: 360px;
+  width: 380px;
   border: 3px solid black;
   color: white;
   /* display: flex; */
@@ -34,9 +34,10 @@
 .btnAdd {
   margin-top: 20px;
   width: 100%;
+  font-size: 18px;
   background-color: #3c1cf0;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
   color: rgb(157, 255, 0);
   cursor: pointer;
 }

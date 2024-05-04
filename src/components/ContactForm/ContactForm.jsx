@@ -24,20 +24,18 @@ export default function ContactForm() {
       .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
       .min(3, "Too Short!")
       .max(50, "Too Long!")
-      // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
       .required("Required"),
     Country: Yup.string()
-      .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
+      .trim()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
       .required("Required"),
     Number: Yup.string("Must be a valid number!").required("Required"),
     Mail: Yup.string()
-      .trim() //Yup.string(), Yup.min(), Yup.max(), Yup.required() - валідатори,
+      .trim()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
-      // .matches(/^[^0-9]*$/, "Name should not contain numbers") // не дозволяє вводити цифри
       .required("Required"),
   });
 

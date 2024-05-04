@@ -7,7 +7,7 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import css from "./App.module.css";
 import ContactsList from "./components/ContactList/ContactList";
 import Loader from "./components/Loader/Loader";
-import { Toaster } from "react-hot-toast"; // Импортируем Toaster
+import toast, { Toaster } from "react-hot-toast"; // Импортируем Toaster
 
 export default function App() {
   const dispatch = useDispatch();

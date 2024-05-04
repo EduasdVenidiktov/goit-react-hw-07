@@ -23,18 +23,18 @@ export default function Contact({ id, name, number, mail, country }) {
         </div>
         <div className={css.infoBlock}>
           <img className={css.icon} src={phoneIcon} alt="Icon phone" />
-          <a className={css.phoneNumber} href={`tel:${number}`}>
+          <a className={css.infoLink} href={`tel:${number}`}>
             {number}
           </a>
         </div>
         <div className={css.infoBlock}>
-          <img className={css.icon} src={mailIcon} alt="Icon phone" />
-          <a className={css.phoneNumber} href={`tel:${mail}`}>
+          <img className={css.icon} src={mailIcon} alt="Icon mail" />
+          <a className={css.infoLink} href={`tel:${mail}`}>
             {mail}
           </a>
         </div>
       </div>
-      <div className={css.buttonBox}>
+      <div>
         <button className={css.buttonDelete} onClick={handleDelete}>
           Delete
         </button>
