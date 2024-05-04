@@ -1,8 +1,14 @@
+import { useDispatch } from "react-redux";
 import css from "./SearchBox.module.css";
+import { setStatusFilter } from "../../redux/filtersSlice";
 
 const SearchBox = ({ value, onChange }) => {
+  const dispatch = useDispatch();
   const handleInputChange = (ev) => {
-    onChange(ev.target.value); // Вызываем функцию onChange для обновления значения в родительском компоненте
+    const newValue = ev.target.value;
+
+    onChange(newValue); // Вызываем функцию onChange для обновления значения в родительском компоненте
+    dispatch(setStatusFilter(newValue));
   };
 
   return (
