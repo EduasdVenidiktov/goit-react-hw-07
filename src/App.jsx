@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchContacts } from "./redux/contactsOps";
 import { selectContactsState } from "./redux/selectors";
 import ContactForm from "./components/ContactForm/ContactForm";
@@ -8,15 +8,15 @@ import css from "./App.module.css";
 import ContactsList from "./components/ContactList/ContactList";
 import Loader from "./components/Loader/Loader";
 import toast, { Toaster } from "react-hot-toast";
+import { setSearchContact } from "./redux/contactsSlice";
 
 export default function App() {
-  const [searchContact, setSearchContact] = useState("");
+  const dispatch = useDispatch();
 
   const handleSearchChange = (value) => {
-    setSearchContact(value);
+    dispatch(setSearchContact(value));
   };
 
-  const dispatch = useDispatch();
   const contactsState = useSelector(selectContactsState);
   useEffect(() => {
     dispatch(fetchContacts()).catch(() => {
@@ -34,7 +34,7 @@ export default function App() {
       <ContactForm contacts={contactsState} />
       {isLoading ? <Loader /> : null}
       <ContactsList
-        searchContact={searchContact}
+        searchContact={contactsState.searchContact}
         onSearchChange={handleSearchChange}
       />
       <Toaster position="top-center" />{" "}

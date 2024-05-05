@@ -54,6 +54,8 @@ const contactsSlice = createSlice({
 // Експорт редюсера
 export const contactsReducer = contactsSlice.reducer;
 
+export const { setSearchContact, setShowError } = contactsSlice.actions;
+
 export default contactsSlice;
 
 // Створення та експорт мемоізованого селектора selectFilteredContacts
