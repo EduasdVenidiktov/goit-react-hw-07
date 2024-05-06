@@ -8,7 +8,6 @@ const fetchContacts = createAsyncThunk(
   "contacts / fetchAll",
   // Використовуємо символ підкреслення як ім'я першого параметра,тому що в цій операції він нам не потрібен
   async (_, thunkAPI) => {
-    console.log(thunkAPI);
     try {
       const response = await axios.get("/contacts");
       // При успішному запиті повертаємо проміс із даними
