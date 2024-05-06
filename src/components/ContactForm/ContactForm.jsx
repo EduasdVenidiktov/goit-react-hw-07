@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup"; //імпорт бібліотеки валідації в компонент форми.
 import { useDispatch } from "react-redux";
 import CounterContacts from "../Counter/Counter.jsx";
-import { addContacts } from "../../redux/contactsOps.js";
+import { addContact } from "../../redux/contactsOps.js";
 
 const initialValues = {
   Name: "",
@@ -47,7 +47,7 @@ export default function ContactForm() {
       number: values.Number,
       mail: values.Mail,
     };
-    dispatch(addContacts(newContact)); // Додаємо новий контакт до списку або передаємо його до батьківського компонента
+    dispatch(addContact(newContact)); // Додаємо новий контакт до списку або передаємо його до батьківського компонента
 
     actions.resetForm(); //метод resetForm для очищення полів форми після відправки.
   };

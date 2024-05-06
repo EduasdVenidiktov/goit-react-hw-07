@@ -12,36 +12,40 @@ const fetchContacts = createAsyncThunk(
       const response = await axios.get("/contacts");
       // При успішному запиті повертаємо проміс із даними
       return response.data;
-    } catch (ev) {
+    } catch (error) {
       toast.error("Failed to load contacts. Please try again later.");
-      return thunkAPI.rejectWithValue(ev.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const addContacts = createAsyncThunk(
+const addContact = createAsyncThunk(
   "contacts/add",
 
   async (newItem, thunkAPI) => {
     try {
       const response = await axios.post("/contacts", newItem);
       return response.data;
-    } catch (ev) {
-      return thunkAPI.rejectWithValue(ev.message);
+    } catch (error) {
+      toast.error("Failed to add contact. Please try again.");
+
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const deleteContacts = createAsyncThunk(
+const deleteContact = createAsyncThunk(
   "contacts/delete",
   async (itemId, thunkAPI) => {
     try {
       const response = await axios.delete(`/contacts/${itemId}`);
       return response.data;
-    } catch (ev) {
-      return thunkAPI.rejectWithValue(ev.message);
+    } catch (error) {
+      toast.error("Failed to delete contact. Please try again.");
+
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export { fetchContacts, addContacts, deleteContacts };
+export { fetchContacts, addContact, deleteContact };

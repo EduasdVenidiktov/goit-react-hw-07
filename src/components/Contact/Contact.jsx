@@ -5,11 +5,11 @@ import countryIcon from "../../assets/country.svg";
 import mailIcon from "../../assets/mail.svg";
 
 import { useDispatch } from "react-redux";
-import { deleteContacts } from "../../redux/contactsOps";
+import { deleteContact } from "../../redux/contactsOps";
 
 export default function Contact({ id, name, number, mail, country }) {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContacts(id));
+  const handleDelete = () => dispatch(deleteContact(id));
   return (
     <div className={css.contactContainer}>
       <div>
