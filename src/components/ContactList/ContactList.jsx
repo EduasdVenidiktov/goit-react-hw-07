@@ -6,14 +6,10 @@ import { selectFilteredContacts } from "../../redux/contactsSlice";
 
 const ContactsList = () => {
   const searchContact = useSelector((state) => state.contacts.searchContact);
-  const filteredContacts = useSelector((state) =>
-    selectFilteredContacts(state, searchContact)
-  );
-
+  const filteredContacts = useSelector(selectFilteredContacts);
   return (
     <div>
       <SearchBox value={searchContact} onChange={() => {}} />
-
       <ul className={css.contactList}>
         {filteredContacts.map((item) => (
           <li key={item.id}>
